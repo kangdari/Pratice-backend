@@ -42,3 +42,11 @@ Koa 애플리케이션은 미들웨어 배열로 구성.
 next 함수는 Promise를 반환 함. next 함수 호출 이후 .then을 사용하여 Promise가 끝난 후 다른 작업 가능
 
 koa는 async/await를 정식으로 지원함.
+
+* * *
+
+### nodemon 사용
+
+nodemon을 사용하여 코드를 변경할 때마다 서버를 자동으로 재시작
+
+$ yarn add -dev nodemon // nodemon 설치 이후 package.json에 scripts 작성
