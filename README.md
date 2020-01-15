@@ -63,6 +63,8 @@ ctx.parmas 객체에서 조회 가능
 
 URL 쿼리의 경우, /posts/?id=3 같은 형식으로 요청했다면 ctx.query에서 조회 가능
 
+* * *
+
 ### REST API
  
 REST API를 만들어 클라이언트가 서버에 자신이 데이터를 조회, 생성, 삭제, 업데이트하겠다고 요청하면 서버는 필요한 로직에
@@ -70,4 +72,7 @@ REST API를 만들어 클라이언트가 서버에 자신이 데이터를 조회
 
 REST API는 요청 종류에 따라 다른 HTTP 메서드를 사용함.
 
-[강다리 블로그](https://blog.naver.com/ksh44820/221707768338){: target="_blank"}
+[강다리 블로그 REST API](https://blog.naver.com/ksh44820/221707768338)
+
+* * *
+
