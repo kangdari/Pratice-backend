@@ -11,6 +11,16 @@ router.get('/', ctx=>{
 router.get('/about', ctx=>{
     ctx.body = '소개'
 })
+router.get('/about/:name?', ctx =>{
+    const { name } = ctx.params;
+    // name의 존재 여부에 따라 다른 결과 출력
+    ctx.body = name ? `${name}의 소개` : '소개'; 
+})
+router.get('/posts', ctx => {
+    const { id } = ctx.query;
+    // id의 존재 여부에 따라 다른 결과 출력
+    ctx.body = id ? `포스트 #${id}` : '포스트 아이디 없음'
+})
 
 // app 인스턴스에 라우저 적용
 app.use(router.routes()).use(router.allowedMethods());
