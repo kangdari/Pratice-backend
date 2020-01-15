@@ -76,3 +76,7 @@ REST API는 요청 종류에 따라 다른 HTTP 메서드를 사용함.
 
 * * *
 
+$ yarn add koa-bodyparser //  koa-bodyparser 미들웨어
+
+이 미들웨어는 POST/PUT/PATCH와 같은 메서드의 Request Body에 JSON 형식으로 데이터를 넣어 주면,
+이를 파싱하여 서버에서 사용할 수 있게 해줌.
