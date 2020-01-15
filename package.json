@@ -6,10 +6,12 @@
   "author": "ksh44820@likelion.org <ksh44820@likelion.org>",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "eslint-config-prettier": "^6.9.0",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
-    "koa-router": "^7.4.0"
+    "koa-router": "^7.4.0",
+    "mongoose": "^5.8.7"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
