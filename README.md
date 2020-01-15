@@ -50,3 +50,9 @@ koa는 async/await를 정식으로 지원함.
 nodemon을 사용하여 코드를 변경할 때마다 서버를 자동으로 재시작
 
 $ yarn add -dev nodemon // nodemon 설치 이후 package.json에 scripts 작성
+
+* * *
+
+### koa-router 사용
+
+$ yarn add koa-router
