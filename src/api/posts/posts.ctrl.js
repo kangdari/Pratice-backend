@@ -57,6 +57,7 @@ export const list = async ctx => {
         const posts = await Post.find()
         // 1: 오름차순, -1: 내림차순
         .sort({ _id: -1}) // exec() 전에 sort() 함수 추가
+        .limit(10)
         .exec();
         ctx.body = posts;
     } catch (e) {
