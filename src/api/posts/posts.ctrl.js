@@ -1,6 +1,39 @@
 import Post from '../../models/post.js';
+import mongooes from 'mongoose';
+import Joi from 'joi';
+
+const { ObjectId } = mongooes.Types;
+
+// ObjectId 검증을 위한 미들웨어 
+export const checkObjectId = (ctx, next) =>{
+    const { id } = ctx.params
+    // id가 유효하지 않다면 400 오류 발생
+    if(!ObjectId.isValid(id)){
+        ctx.status = 400; // Bad Request
+        return;
+    }
+    return next();
+}
+
+
+
 // post 작성
 export const write = async ctx => {
+    const schema = Joi.object().keys({
+        // 객체가 다음 필드를 가지고 있는지 검증
+        title: Joi.string().required(), // requireㅇ()가 있으면 필수 요소
+        body: Joi.string().required(),
+        tags: Joi.array().items(Joi.string()).required(), // 문자열 배열
+    })
+
+    // 검증 후 검증 실패인 경우 에러 처리
+    const result = Joi.validate(ctx.request.body, schema);
+    if(result.error){
+        ctx.status = 400; // Bad Request
+        ctx.body = result.error;
+        return;
+    }
+
     // 웹 요청 정보
     const { title, body, tags } = ctx.request.body;
 
@@ -57,6 +90,21 @@ export const remove = async ctx => {
 };
 // post 수정
 export const update = async ctx => {
+    const schema = Joi.object().keys({
+        // 객체가 다음 필드를 가지고 있는지 확인
+        title: Joi.string(),
+        body: Joi.string(),
+        tags: Joi.string().items(Joi.string())
+    })
+
+    // 검증 결과 확인
+    const result = Joi.validate(ctx.request.body, schema);
+    if(result.error){
+        ctx.status = 400;
+        ctx.body = result.error;
+        return;
+    }
+
     const { id } = ctx.params;
     try {
         const post = await Post.findByIdAndUpdate(id, ctx.request.body, {

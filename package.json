@@ -8,6 +8,7 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "eslint-config-prettier": "^6.9.0",
+    "joi": "^14.3.1",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
@@ -17,9 +18,9 @@
     "eslint": "^6.8.0",
     "nodemon": "^2.0.2"
   },
-  "scripts":{
+  "scripts": {
     "start": "node src",
     "start:dev": "nodemon --watch src/ src/index.js"
   },
-    "type": "module"
+  "type": "module"
 }
