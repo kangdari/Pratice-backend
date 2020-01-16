@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 
 // api 라우터 불러옴
 import api from './api/index.js';
+import createFakeDate from './createFakeData.js';
 
 // config() 함수 호출
 dotenv.config();
@@ -18,6 +19,8 @@ mongoose
     .connect(MONGO_URL, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true})
     .then(()=>{
         console.log('Connected to MongoDB');
+        // 가짜 데이터 생성
+        createFakeDate();
     })
     .catch(e => {
         console.error(e);
