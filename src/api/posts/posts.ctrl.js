@@ -15,8 +15,6 @@ export const checkObjectId = (ctx, next) =>{
     return next();
 }
 
-
-
 // post 작성
 export const write = async ctx => {
     const schema = Joi.object().keys({
@@ -56,7 +54,10 @@ export const list = async ctx => {
     try {
         // 모델 인스턴스의 find() 함수롤 데이터 조회
         // exec() 를 붙여줘야 서버에 쿼리 요청
-        const posts = await Post.find().exec();
+        const posts = await Post.find()
+        // 1: 오름차순, -1: 내림차순
+        .sort({ _id: -1}) // exec() 전에 sort() 함수 추가
+        .exec();
         ctx.body = posts;
     } catch (e) {
         ctx.throw(500, e);
