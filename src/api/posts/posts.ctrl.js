@@ -51,6 +51,15 @@ export const write = async ctx => {
 };
 // 모든 post 조회
 export const list = async ctx => {
+    // query는 문자열이기 때문에 숫자로 변환해주어야 함.
+    // default 값은 1
+    const page = parseInt(ctx.query.page || '1', 10);
+
+    if(page < 1){
+        ctx.status = 400;
+        return;
+    }
+
     try {
         // 모델 인스턴스의 find() 함수롤 데이터 조회
         // exec() 를 붙여줘야 서버에 쿼리 요청
@@ -58,6 +67,7 @@ export const list = async ctx => {
         // 1: 오름차순, -1: 내림차순
         .sort({ _id: -1}) // exec() 전에 sort() 함수 추가
         .limit(10)
+        .skip((page -1 ) * 10)
         .exec();
         ctx.body = posts;
     } catch (e) {

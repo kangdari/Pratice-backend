@@ -20,7 +20,7 @@ mongoose
     .then(()=>{
         console.log('Connected to MongoDB');
         // 가짜 데이터 생성
-        createFakeDate();
+        // createFakeDate();
     })
     .catch(e => {
         console.error(e);
