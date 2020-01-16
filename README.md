@@ -176,3 +176,10 @@ dotenv.config(); // config() 함수 호출
 
 * * *
 
+### MongoDB Compass 설치 및 사용
+
+* * *
+
+### 데이터 생성 및 조회
+
+
