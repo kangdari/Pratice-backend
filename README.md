@@ -157,10 +157,13 @@ dotenv.config(); // config() 함수 호출
 6. 자동 완성을 통해 모듈 불러오기, 루트 디렉토리에 jsconfig.json 작성
 
 ```{.javascript}
-import dotenv from 'dotenv';
-(...)
-dotenv.config(); // config() 함수 호출
-(...)
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "es2015"
+    },
+    "include": ["src/**/*"]
+}
 ```
 
 * * *
