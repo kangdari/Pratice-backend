@@ -7,7 +7,9 @@ import mongoose from 'mongoose';
 
 // api 라우터 불러옴
 import api from './api/index.js';
-import createFakeDate from './createFakeData.js';
+// import createFakeDate from './createFakeData.js';
+
+import jwtMiddleware from './lib/jwtMiddleware.js'
 
 // config() 함수 호출
 dotenv.config();
@@ -32,8 +34,10 @@ const router = new Router();
 // 라우터 설정, api 라우터 적용
 router.use('/api', api.routes());
 
+// 미들웨어 적용
 // 라우터 적용 전에 bodyParser 적용
 app.use(bodyParser());
+app.use(jwtMiddleware);
 
 // app 인스턴스에 라우터 적용
 app.use(router.routes()).use(router.allowedMethods());
