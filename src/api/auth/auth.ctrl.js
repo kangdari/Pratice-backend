@@ -1,8 +1,6 @@
 import Joi from 'Joi';
 import User from '../../models/user.js';
-import posts from '../posts/index.js';
 
-// username, password : String
 // Post /api/auth/register
 export const register = async ctx => {
     const schema = Joi.object().keys({
@@ -40,7 +38,36 @@ export const register = async ctx => {
     }
 };
 
-export const login = async ctx => {};
+// Post /api/auth/login
+export const login = async ctx => {
+    const { username, password } = ctx.request.body;
+
+    // username, password가 없으면 에러 처리
+    if(!username || !password){
+        ctx.status = 401; // Unauthorized 인증 오류 
+        return;
+    }
+
+    try{
+        const user = await User.findByUsername(username);
+        // 유저가 없음
+        if(!user){
+            ctx.status = 401; // Unauthorized 인증 오류 
+            return;
+        }
+        // password 검증
+        const vaild = await user.checkPassword(password);
+        // 잘못된 password
+        if(!vaild){
+            ctx.status = 401;
+            return;
+        }
+        // 응답할 데이터에서 hashedPassword 필드 제거
+        ctx.body = user.serialize();
+    }catch(e) {
+        ctx.throw(500, e); // 서버 오류
+    }
+};
 
 export const check = async ctx => {};
 
