@@ -345,5 +345,13 @@ const token = jwt.sign(
 
 3. 토큰 검증하기
 
-src/llb/jwtMiddleware.js 작성
+>src/llb/jwtMiddleware.js 작성
+
+4. 토큰 재발급하기
+
+>jwtMiddleware.js 에서 토큰에 대한 정보를 출력했습니다. 
+
+>iat: 토큰 생성 시간, exp: 남은 유효 기간을 나타냅니다.
+
+>만료 날짜가 3.5일 미만이라면 토큰을 새로 재발급해주겠습니다.
 

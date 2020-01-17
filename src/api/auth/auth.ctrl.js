@@ -87,7 +87,6 @@ export const login = async ctx => {
 // Get /api/auth/check
 // ??? POST 방식으로 조회됨 .. ??? 
 export const check = async ctx => {
-    console.log(ctx);
     const { user } = ctx.state;
     // 로그인 중 아님.
     if (!user) {
