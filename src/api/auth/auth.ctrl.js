@@ -85,7 +85,6 @@ export const login = async ctx => {
 
 // 로그인 상태 확인 메서드, 토큰 확인
 // Get /api/auth/check
-// ??? POST 방식으로 조회됨 .. ??? 
 export const check = async ctx => {
     const { user } = ctx.state;
     // 로그인 중 아님.
@@ -96,4 +95,9 @@ export const check = async ctx => {
     ctx.body = user;
 };
 
-export const logout = async ctx => {};
+// Post /api/auth/logout
+export const logout = async ctx => {
+    // 빈 쿠키로 생성
+    ctx.cookies.set('access_token');
+    ctx.status = 204; // No Connect
+};
