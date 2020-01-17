@@ -1,5 +1,6 @@
 import mongooes from 'mongoose';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const { Schema } = mongooes;
 
@@ -26,13 +27,28 @@ UserSchema.methods.serialize = function() {
     const data = this.toJSON();
     delete data.hashedPassword;
     return data;
-}
+};
+
+UserSchema.methods.generateToken = function() {
+    const token = jwt.sign(
+        // 첫 번째 파라미터에는 토큰 안에 집어 넣고 싶은 데이터를 넣음.
+        {
+            _id: this.id,
+            username: this.username,
+        },
+        process.env.JWT_SECRET, // 두 번째 파라미터는 JWT 비밀키를 넣음.
+        {
+            expiresIn: '7d', // 7일 동안 유효함.
+        },
+    );
+    return token;
+};
 
 // 스태틱 메서드, 스태틱 함수에서 this는 모델을 가리킴.
 // username으로 데이터 찾기
-UserSchema.statics.findByUsername = function(username){
+UserSchema.statics.findByUsername = function(username) {
     return this.findOne({ username }); // this = User
-}
+};
 
 // 모델 생성
 const User = mongooes.model('User', UserSchema);

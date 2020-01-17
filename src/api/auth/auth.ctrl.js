@@ -33,6 +33,13 @@ export const register = async ctx => {
         await user.save(); // 데이터베이스에 저장
         // 응답할 데이터에서 hashedPassword 필드 제거 
         ctx.body = user.serialize();
+
+        // 토큰 및 쿠키 생성
+        const token = user.generateToken();
+        ctx.cookies.set('access_token', token, {
+            maxAge: 1000 * 60 * 60 * 24 * 7, // 7-day
+            httpOnly: true
+        })
     }catch(e) {
         ctx.throw(500, e);
     }
@@ -64,11 +71,20 @@ export const login = async ctx => {
         }
         // 응답할 데이터에서 hashedPassword 필드 제거
         ctx.body = user.serialize();
+        
+        // 토큰 및 쿠키 생성
+        const token = user.generateToken();
+        ctx.cookies.set('access_token', token, {
+            maxAge: 1000 * 60 * 60 * 24 * 7, // 7-day
+            httpOnly: true
+        })
     }catch(e) {
         ctx.throw(500, e); // 서버 오류
     }
 };
 
-export const check = async ctx => {};
+export const check = async ctx => {
+
+};
 
 export const logout = async ctx => {};
